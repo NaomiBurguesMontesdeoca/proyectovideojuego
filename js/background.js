@@ -5,9 +5,9 @@ class Background {
         this.backgroungPos = {
             x: 0,
             y: 0
-        },
+        }
 
-            this.image = new Image()
+        this.image = new Image()
         this.image.src = "../images/background.jpeg"
     }
 
