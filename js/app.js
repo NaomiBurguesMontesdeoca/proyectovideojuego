@@ -8,7 +8,7 @@ const game = {
 
     player: undefined,
     lifesScore: undefined,
-    lifesScoreText: 0,
+    text: 0,
 
     obstacles: [],
     monster: [],
@@ -28,6 +28,7 @@ const game = {
         this.createLab()
         this.createLifes()
         this.start()
+        this.drawText(this.text)
     },
 
     setContext() {
@@ -103,16 +104,15 @@ const game = {
         this.monster.forEach(elm => elm.draw())
         this.lab.forEach(elm => elm.draw())
         this.lifes.forEach(elm => elm.draw())
-        // this.drawText()
         // this.obstacles.draw()
         // this.obstacle.forEach(elm => elm.drawText()
     },
 
-    // drawText(lifesScoreText) {
-    //     this.ctx.font = '30px arial'
-    //     this.ctx.fillStyle = '#D21404'
-    //     this.ctx.fillText(lifesScoreText, this.lifesScorePos.x - this.lifesScoreSize.w, this.lifesScorePos.y + this.lifesScoreSize.h - 5)
-    // },
+    drawText(text) {
+        this.ctx.font = '30px arial'
+        this.ctx.fillStyle = '#D21404'
+        this.ctx.fillText(text, this.lifesScorePos.x - this.lifesScoreSize.w, this.lifesScorePos.y + this.lifesScoreSize.h - 5)
+    },
 
     createObstacle() {
         // this.obstacles.push(drawText())
