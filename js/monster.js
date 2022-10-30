@@ -26,17 +26,10 @@ class Monster {
     }
 
     move() {
-
-
         this.monsterPos.y += this.monsterSpeed
     }
 
     clear() {
-        // if (this.monsterPos.y > this.canvasSize.h) {
-        //     this.monsterPos.y = 0
-        // }
-        // if (this.monsterPos.y = 0) {
 
-        // }
     }
 }

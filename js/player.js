@@ -2,7 +2,6 @@ class Player {
     constructor(ctx, canvasSize) {
         this.ctx = ctx
         this.canvasSize = canvasSize
-        // this.keys = keys
         this.playerSize = {
             w: 100, h: 100
         }
@@ -10,6 +9,7 @@ class Player {
             x: canvasSize.w / 2 - this.playerSize.w / 2,
             y: canvasSize.h - this.playerSize.h - 50
         }
+        this.playerVel = 20
 
         this.image = new Image()
         this.image.src = "../images/player.png"
@@ -30,13 +30,12 @@ class Player {
         document.onkeydown = event => {
             switch (event.key) {
                 case 'ArrowLeft':
-                    this.playerPos.x -= 20
+                    this.playerPos.x -= this.playerVel
                     break;
                 case 'ArrowRight':
-                    this.playerPos.x += 20
+                    this.playerPos.x += this.playerVel
                     break;
             }
         }
     }
-
 }

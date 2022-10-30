@@ -7,6 +7,8 @@ const game = {
     background: undefined,
 
     player: undefined,
+    lifesScore: undefined,
+    lifesScoreText: 0,
 
     obstacles: [],
     monster: [],
@@ -42,6 +44,7 @@ const game = {
     start() {
         this.reset()
 
+
         this.interval = setInterval(() => {
 
             this.timeCounter++
@@ -59,16 +62,19 @@ const game = {
             this.clearAll()
             this.drawAll()
             this.moveAll()
+            this.isCollisionMonster()
+            this.isCollisionLab()
+            this.isCollisionLifes()
 
-        }, 50)
+        }, 50) // como hacer que cada uno empiece en un tiempo diferente?
     },
 
     reset() {
         this.background = new Background(this.ctx, this.canvasSize)
         this.player = new Player(this.ctx, this.canvasSize)
+        this.lifesScore = new LifesScore(this.ctx, this.canvasSize)
         // this.obstacles = new Obstacle(this.ctx, this.canvasSize)
-        // this.monster = new Monster(this.ctx, this.canvasSize)
-        //añadir bonus
+
     },
 
     clearAll() {
@@ -79,8 +85,6 @@ const game = {
         this.lab = this.lab.filter(elm => elm.labPos.y <= this.canvasSize.h)
         this.lifes.forEach(elm => elm.clear())
         this.lifes = this.lifes.filter(elm => elm.lifesPos.y <= this.canvasSize.h)
-
-        // añadir todo lo que queramos borrar (obstacle, monster, lab, life)
     },
 
     moveAll() {
@@ -89,27 +93,26 @@ const game = {
         this.monster.forEach(elm => elm.move())
         this.lab.forEach(elm => elm.move())
         this.lifes.forEach(elm => elm.move())
-
     },
 
     drawAll() {
 
         this.background.draw()
         this.player.draw()
+        this.lifesScore.draw()
         this.monster.forEach(elm => elm.draw())
         this.lab.forEach(elm => elm.draw())
         this.lifes.forEach(elm => elm.draw())
-
-        // this.monster.draw()
+        // this.drawText()
         // this.obstacles.draw()
-        // this.obstacle.forEach(elm => elm.drawText())
-
-
+        // this.obstacle.forEach(elm => elm.drawText()
     },
 
-    gameOver() {
-        clearInterval(this.interval)
-    },
+    // drawText(lifesScoreText) {
+    //     this.ctx.font = '30px arial'
+    //     this.ctx.fillStyle = '#D21404'
+    //     this.ctx.fillText(lifesScoreText, this.lifesScorePos.x - this.lifesScoreSize.w, this.lifesScorePos.y + this.lifesScoreSize.h - 5)
+    // },
 
     createObstacle() {
         // this.obstacles.push(drawText())
@@ -125,6 +128,64 @@ const game = {
 
     createLifes() {
         this.lifes.push(new Lifes(this.ctx, this.canvasSize))
-    }
+    },
+
+    // createLifesScore() {
+    //     this.lifesScore = new LifesScore(this.ctx, this.canvasSize)
+    // },
+
+    isCollisionMonster() {
+        this.monster.forEach((m) => {
+            if (
+                this.player.playerPos.x < m.monsterPos.x + m.monsterSize.w &&
+                this.player.playerPos.x + this.player.playerSize.w > m.monsterPos.x &&
+                this.player.playerPos.y < m.monsterPos.y + this.player.playerSize.h &&
+                this.player.playerSize.h + this.player.playerPos.y > m.monsterPos.y
+            ) {
+                this.player.playerVel += 50
+                m.monsterPos.y = 5000
+
+                setInterval(() => {
+                    this.player.playerVel = 20
+                }, 5000)
+            }
+        })
+    },
+
+    isCollisionLab() {
+        this.lab.forEach((lab) => {
+            if (
+                this.player.playerPos.x < lab.labPos.x + lab.labSize.w &&
+                this.player.playerPos.x + this.player.playerSize.w > lab.labPos.x &&
+                this.player.playerPos.y < lab.labPos.y + this.player.playerSize.h &&
+                this.player.playerSize.h + this.player.playerPos.y > lab.labPos.y
+            ) {
+                this.player.playerVel -= 15
+                lab.labPos.y = 5000
+
+                setInterval(() => {
+                    this.player.playerVel = 20
+                }, 10000)
+            }
+        })
+    },
+
+    isCollisionLifes() {
+        this.lifes.forEach((lifes) => {
+            if (
+                this.player.playerPos.x < lifes.lifesPos.x + lifes.lifesSize.w &&
+                this.player.playerPos.x + this.player.playerSize.w > lifes.lifesPos.x &&
+                this.player.playerPos.y < lifes.lifesPos.y + this.player.playerSize.h &&
+                this.player.playerSize.h + this.player.playerPos.y > lifes.lifesPos.y
+            ) {
+                this.lifesScore++ // ¿porque desaparece?
+                lifes.lifesPos.y = 5000
+            }
+        })
+    },
+
+    gameOver() {
+        clearInterval(this.interval)
+    },
 
 }
