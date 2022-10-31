@@ -10,7 +10,8 @@ const game = {
     lifesScore: undefined,
     textLifes: 3,
 
-    obstacles: undefined,
+    obstacleWrong: undefined,
+    obstacleRight: undefined,
     monster: [],
     lab: [],
     lifes: [],
@@ -31,7 +32,8 @@ const game = {
         this.createLab()
         this.createLifes()
         this.createLifesScore()
-        // this.createObstacle()
+        this.createObstacleWrong()
+        this.createObstacleRight()
         this.start()
     },
 
@@ -82,7 +84,7 @@ const game = {
         this.background = new Background(this.ctx, this.canvasSize)
         this.player = new Player(this.ctx, this.canvasSize)
         this.lifesScore = new LifesScore(this.ctx, this.canvasSize)
-        // this.obstacles = new Obstacle(this.ctx, this.canvasSize)
+
 
     },
 
@@ -113,8 +115,8 @@ const game = {
         this.monster.forEach(elm => elm.draw())
         this.lab.forEach(elm => elm.draw())
         this.lifes.forEach(elm => elm.draw())
-        // this.obstacles.draw()
-        // this.obstacle.forEach(elm => elm.drawText()
+        this.obstacleWrong.draw()
+        this.obstacleRight.draw()
     },
 
     drawText(textLifes) {
@@ -124,9 +126,13 @@ const game = {
             this.lifesScore.lifesScorePos.y + this.lifesScore.lifesScoreSize.h - 5)
     },
 
-    // createObstacle() {
-    //     this.obstacles = new Obstacle(this.ctx, this.canvasSize)
-    // },
+    createObstacleWrong() {
+        this.obstacleWrong = new WrongObstacle(this.ctx, this.canvasSize)
+    },
+
+    createObstacleRight() {
+        this.obstacleRight = new RightObstacle(this.ctx, this.canvasSize)
+    },
 
     createMonster() {
         this.monster.push(new Monster(this.ctx, this.canvasSize))
