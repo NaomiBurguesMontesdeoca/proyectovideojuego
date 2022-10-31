@@ -10,11 +10,13 @@ const game = {
     lifesScore: undefined,
     textLifes: 3,
 
-    obstacles: [],
+    obstacles: undefined,
     monster: [],
     lab: [],
     lifes: [],
     timeCounter: 0,
+    timeCounterMonster: 0,
+    timeCounterLab: 0,
     currentBonus: '',
 
     canvasSize: {
@@ -29,8 +31,8 @@ const game = {
         this.createLab()
         this.createLifes()
         this.createLifesScore()
+        // this.createObstacle()
         this.start()
-        // this.drawText(this.text)
     },
 
     setContext() {
@@ -61,13 +63,16 @@ const game = {
                 this.createLifes()
             }
 
+
             this.clearAll()
             this.drawAll()
             this.moveAll()
-            this.isCollisionBonus()
-            this.isCollisionLifes()
+            this.isColisionMonster()
+            this.isColisionLab()
+            this.isColisionLifes()
+            this.isCurrentBonus()
 
-            // this.isCollisionVsCollision()
+            // this.isColisionVsColision()
         }, 50)// como hacer que cada uno empiece en un tiempo diferente?
 
 
@@ -119,9 +124,9 @@ const game = {
             this.lifesScore.lifesScorePos.y + this.lifesScore.lifesScoreSize.h - 5)
     },
 
-    createObstacle() {
-        // this.obstacles.push(drawText())
-    },
+    // createObstacle() {
+    //     this.obstacles = new Obstacle(this.ctx, this.canvasSize)
+    // },
 
     createMonster() {
         this.monster.push(new Monster(this.ctx, this.canvasSize))
@@ -139,7 +144,7 @@ const game = {
         this.lifesScore = new LifesScore(this.ctx, this.canvasSize)
     },
 
-    isCollisionBonus() {
+    isColisionMonster() {
         this.monster.forEach((m) => {
             if (
                 this.player.playerPos.x < m.monsterPos.x + m.monsterSize.w &&
@@ -148,16 +153,12 @@ const game = {
                 this.player.playerSize.h + this.player.playerPos.y > m.monsterPos.y
             ) {
                 this.currentBonus = 'monster'
-                this.player.playerVel += 50
                 m.monsterPos.y = 5000
-
-                setInterval(() => {
-                    this.player.playerVel = 20
-                }, 5000)
             }
         })
-        console.log(this.currentBonus)
+    },
 
+    isColisionLab() {
         this.lab.forEach((lab) => {
             if (
                 this.player.playerPos.x < lab.labPos.x + lab.labSize.w &&
@@ -166,18 +167,36 @@ const game = {
                 this.player.playerSize.h + this.player.playerPos.y > lab.labPos.y
             ) {
                 this.currentBonus = 'lab'
-                this.player.playerVel -= 15
                 lab.labPos.y = 5000
-
-                setInterval(() => {
-                    this.player.playerVel = 20
-                }, 10000)
             }
         })
-
     },
 
-    isCollisionLifes() {
+    isCurrentBonus() {
+        if (this.currentBonus === 'monster') {
+            this.player.playerVel = 40
+            this.timeCounterMonster++
+        }
+
+        if (this.timeCounterMonster === 10000) {
+            this.player.playerVel = 20
+            this.timeCounterMonster = 0
+            this.currentBonus = undefined
+        }
+
+
+        if (this.currentBonus === 'lab') {
+            this.player.playerVel = 10
+
+        }
+        if (this.timeCounterLab === 15000) {
+            this.player.playerVel = 20
+            this.timeCounterLab = 0
+            this.currentBonus = undefined
+        }
+    },
+
+    isColisionLifes() {
         this.lifes.forEach((lifes) => {
             if (
                 this.player.playerPos.x < lifes.lifesPos.x + lifes.lifesSize.w &&
@@ -185,7 +204,7 @@ const game = {
                 this.player.playerPos.y < lifes.lifesPos.y + this.player.playerSize.h &&
                 this.player.playerSize.h + this.player.playerPos.y > lifes.lifesPos.y
             ) {
-                this.textLifes < 4 ? this.textLifes++ : null
+                this.textLifes < 3 ? this.textLifes++ : null
                 lifes.lifesPos.y = 5000
             }
         })
