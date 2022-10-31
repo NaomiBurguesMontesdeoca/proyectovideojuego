@@ -8,13 +8,14 @@ const game = {
 
     player: undefined,
     lifesScore: undefined,
-    text: 0,
+    textLifes: 3,
 
     obstacles: [],
     monster: [],
     lab: [],
     lifes: [],
     timeCounter: 0,
+    currentBonus: '',
 
     canvasSize: {
         w: undefined,
@@ -27,8 +28,9 @@ const game = {
         this.createMonster()
         this.createLab()
         this.createLifes()
+        this.createLifesScore()
         this.start()
-        this.drawText(this.text)
+        // this.drawText(this.text)
     },
 
     setContext() {
@@ -44,7 +46,6 @@ const game = {
 
     start() {
         this.reset()
-
 
         this.interval = setInterval(() => {
 
@@ -63,11 +64,13 @@ const game = {
             this.clearAll()
             this.drawAll()
             this.moveAll()
-            this.isCollisionMonster()
-            this.isCollisionLab()
+            this.isCollisionBonus()
             this.isCollisionLifes()
 
-        }, 50) // como hacer que cada uno empiece en un tiempo diferente?
+            // this.isCollisionVsCollision()
+        }, 50)// como hacer que cada uno empiece en un tiempo diferente?
+
+
     },
 
     reset() {
@@ -101,6 +104,7 @@ const game = {
         this.background.draw()
         this.player.draw()
         this.lifesScore.draw()
+        this.drawText(this.textLifes)
         this.monster.forEach(elm => elm.draw())
         this.lab.forEach(elm => elm.draw())
         this.lifes.forEach(elm => elm.draw())
@@ -108,10 +112,11 @@ const game = {
         // this.obstacle.forEach(elm => elm.drawText()
     },
 
-    drawText(text) {
+    drawText(textLifes) {
         this.ctx.font = '30px arial'
         this.ctx.fillStyle = '#D21404'
-        this.ctx.fillText(text, this.lifesScorePos.x - this.lifesScoreSize.w, this.lifesScorePos.y + this.lifesScoreSize.h - 5)
+        this.ctx.fillText(textLifes, this.lifesScore.lifesScorePos.x - this.lifesScore.lifesScoreSize.w,
+            this.lifesScore.lifesScorePos.y + this.lifesScore.lifesScoreSize.h - 5)
     },
 
     createObstacle() {
@@ -130,11 +135,11 @@ const game = {
         this.lifes.push(new Lifes(this.ctx, this.canvasSize))
     },
 
-    // createLifesScore() {
-    //     this.lifesScore = new LifesScore(this.ctx, this.canvasSize)
-    // },
+    createLifesScore() {
+        this.lifesScore = new LifesScore(this.ctx, this.canvasSize)
+    },
 
-    isCollisionMonster() {
+    isCollisionBonus() {
         this.monster.forEach((m) => {
             if (
                 this.player.playerPos.x < m.monsterPos.x + m.monsterSize.w &&
@@ -142,6 +147,7 @@ const game = {
                 this.player.playerPos.y < m.monsterPos.y + this.player.playerSize.h &&
                 this.player.playerSize.h + this.player.playerPos.y > m.monsterPos.y
             ) {
+                this.currentBonus = 'monster'
                 this.player.playerVel += 50
                 m.monsterPos.y = 5000
 
@@ -150,9 +156,8 @@ const game = {
                 }, 5000)
             }
         })
-    },
+        console.log(this.currentBonus)
 
-    isCollisionLab() {
         this.lab.forEach((lab) => {
             if (
                 this.player.playerPos.x < lab.labPos.x + lab.labSize.w &&
@@ -160,6 +165,7 @@ const game = {
                 this.player.playerPos.y < lab.labPos.y + this.player.playerSize.h &&
                 this.player.playerSize.h + this.player.playerPos.y > lab.labPos.y
             ) {
+                this.currentBonus = 'lab'
                 this.player.playerVel -= 15
                 lab.labPos.y = 5000
 
@@ -168,6 +174,7 @@ const game = {
                 }, 10000)
             }
         })
+
     },
 
     isCollisionLifes() {
@@ -178,10 +185,11 @@ const game = {
                 this.player.playerPos.y < lifes.lifesPos.y + this.player.playerSize.h &&
                 this.player.playerSize.h + this.player.playerPos.y > lifes.lifesPos.y
             ) {
-                this.lifesScore++ // ¿porque desaparece?
+                this.textLifes < 4 ? this.textLifes++ : null
                 lifes.lifesPos.y = 5000
             }
         })
+
     },
 
     gameOver() {

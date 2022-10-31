@@ -2,3 +2,32 @@
     margin: 0;
     padding: 0;
 }
+
+.container {
+    margin-top: 180px;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    text-align: center;
+
+}
+
+body button {
+    font-size: 40px;
+    background-color: #D21404;
+    color: #fff;
+    padding: 20px 40px;
+    border: 0;
+    /* top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%); */
+    box-shadow: 0;
+    border-radius: 5px;
+    margin: 0;
+    position: absolute;
+
+}
+
+body {
+    overflow: hidden;
+}
