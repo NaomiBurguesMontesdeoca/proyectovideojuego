@@ -12,7 +12,7 @@ class RightObstacle {
         this.obstacleSpeed = 3
 
         this.imageRight = new Image()
-        this.imageRight.src = '../images/R_length.png'
+        this.imageRight.src = '../images/imagesRight/R_length.png'
     }
 
     draw() {

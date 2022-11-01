@@ -12,7 +12,7 @@ class WrongObstacle {
         this.obstacleSpeed = 3
 
         this.imageWrong = new Image()
-        this.imageWrong.src = '../images/W_lenght.png'
+        this.imageWrong.src = '../images/imagesWrong/W_lenght.png'
 
     }
 

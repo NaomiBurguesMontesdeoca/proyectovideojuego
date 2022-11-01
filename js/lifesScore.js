@@ -23,12 +23,6 @@ class LifesScore {
             this.lifesScoreSize.w,
             this.lifesScoreSize.h)
     }
-
-    // drawText(text) {
-    //     this.ctx.font = '30px arial'
-    //     this.ctx.fillStyle = '#D21404'
-    //     this.ctx.fillText(text, this.lifesScorePos.x - this.lifesScoreSize.w, this.lifesScorePos.y + this.lifesScoreSize.h - 5)
-    // }
 }
 
 
