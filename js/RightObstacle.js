@@ -2,6 +2,7 @@ class RightObstacle {
     constructor(ctx, canvasSize) {
         this.ctx = ctx
         this.canvasSize = canvasSize
+        this.imageName = ['01_length', '02_heigth', '03_width',]
         this.obstacleSize = {
             w: 200, h: 75
         }
@@ -12,7 +13,7 @@ class RightObstacle {
         this.obstacleSpeed = 3
 
         this.imageRight01 = new Image()
-        this.imageRight01.src = '../images/imagesRight/R_length.png'
+        this.imageRight01.src = `../images/imagesRight/${imageName[0]}.png`
     }
 
     drawRight01() {
@@ -25,7 +26,6 @@ class RightObstacle {
 
         this.move()
     }
-
 
     move() {
         this.obstaclePos.y += this.obstacleSpeed

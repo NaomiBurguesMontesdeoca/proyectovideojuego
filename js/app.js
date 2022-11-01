@@ -8,7 +8,7 @@ const game = {
 
     player: undefined,
     lifesScore: undefined,
-    textLifes: 3,
+    textLifes: 1,
     textScore: 'SCORE: ',
 
     obstacleRight: [],
@@ -66,7 +66,6 @@ const game = {
                 this.createLifes()
             }
 
-
             this.clearAll()
             this.drawAll()
             this.moveAll()
@@ -76,18 +75,15 @@ const game = {
             this.isColisionObstacleRight()
             this.isColisionObstacleWrong()
             this.isCurrentBonus()
+            this.gameOver()
 
         }, 50)// como hacer que cada uno empiece en un tiempo diferente?
-
-
     },
 
     reset() {
         this.background = new Background(this.ctx, this.canvasSize)
         this.player = new Player(this.ctx, this.canvasSize)
         this.lifesScore = new LifesScore(this.ctx, this.canvasSize)
-
-
     },
 
     clearAll() {
@@ -125,7 +121,7 @@ const game = {
         this.lifes.forEach(elm => elm.draw())
         this.obstacleRight.forEach(elm => elm.drawRight01())
         this.obstacleWrong.forEach(elm => elm.drawWrong01())
-
+        // this.obstacleRight.forEach(elm => elm.drawRight02())
     },
 
     drawText(textLifes) {
@@ -229,9 +225,7 @@ const game = {
                 lifes.lifesPos.y = 5000
             }
         })
-
     },
-
 
     isColisionObstacleRight() {
         this.obstacleRight.forEach((R) => {
@@ -245,8 +239,8 @@ const game = {
                 R.obstaclePos.y = 5000 //debe desaparecer a la vez que el wrong
             }
         })
-
     },
+
     isColisionObstacleWrong() {
         this.obstacleWrong.forEach((W) => {
             if (
@@ -259,11 +253,11 @@ const game = {
                 W.obstaclePos.y = 5000 //debe desaparecer a la vez que el right
             }
         })
-
     },
 
     gameOver() {
-        clearInterval(this.interval)
+        this.textLifes === 0 ? clearInterval(this.interval) : null // porque hace el game over antes de cambiar la vida a 0
+        console.log('game over')
+        // clearInterval ? this.init() : null
     },
-
 }
