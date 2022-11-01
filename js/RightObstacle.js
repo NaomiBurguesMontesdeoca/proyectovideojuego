@@ -11,13 +11,13 @@ class RightObstacle {
         }
         this.obstacleSpeed = 3
 
-        this.imageRight = new Image()
-        this.imageRight.src = '../images/imagesRight/R_length.png'
+        this.imageRight01 = new Image()
+        this.imageRight01.src = '../images/imagesRight/R_length.png'
     }
 
-    draw() {
+    drawRight01() {
         this.ctx.drawImage(
-            this.imageRight,
+            this.imageRight01,
             this.obstaclePos.x,
             this.obstaclePos.y,
             this.obstacleSize.w,
@@ -25,6 +25,7 @@ class RightObstacle {
 
         this.move()
     }
+
 
     move() {
         this.obstaclePos.y += this.obstacleSpeed

@@ -123,8 +123,8 @@ const game = {
         this.monster.forEach(elm => elm.draw())
         this.lab.forEach(elm => elm.draw())
         this.lifes.forEach(elm => elm.draw())
-        this.obstacleRight.forEach(elm => elm.draw())
-        this.obstacleWrong.forEach(elm => elm.draw())
+        this.obstacleRight.forEach(elm => elm.drawRight01())
+        this.obstacleWrong.forEach(elm => elm.drawWrong01())
 
     },
 
