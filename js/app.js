@@ -8,11 +8,13 @@ const game = {
 
     player: undefined,
     lifesScore: undefined,
-    textLifes: 1,
+    textLifes: 3,
     textScore: 'SCORE: ',
 
     obstacleRight: [],
+    counterRight: 0,
     obstacleWrong: [],
+
     monster: [],
     lab: [],
     lifes: [],
@@ -119,9 +121,8 @@ const game = {
         this.monster.forEach(elm => elm.draw())
         this.lab.forEach(elm => elm.draw())
         this.lifes.forEach(elm => elm.draw())
-        this.obstacleRight.forEach(elm => elm.drawRight01())
-        this.obstacleWrong.forEach(elm => elm.drawWrong01())
-        // this.obstacleRight.forEach(elm => elm.drawRight02())
+        this.obstacleRight.forEach(elm => elm.draw())
+        this.obstacleWrong.forEach(elm => elm.draw())
     },
 
     drawText(textLifes) {
@@ -138,7 +139,11 @@ const game = {
     },
 
     createObstacleRight() {
-        this.obstacleRight.push(new RightObstacle(this.ctx, this.canvasSize))
+        this.obstacleRight.push(new RightObstacle(this.ctx, this.canvasSize, this.counterRight))
+        for (let i = 0; i < 5; i++) {
+            this.counterRight += 1
+        }
+
     },
 
     createObstacleWrong() {

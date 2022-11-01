@@ -11,14 +11,14 @@ class WrongObstacle {
         }
         this.obstacleSpeed = 3
 
-        this.imageWrong01 = new Image()
-        this.imageWrong01.src = '../images/imagesWrong/01_lenght.png'
+        this.imageWrong = new Image()
+        this.imageWrong.src = '../images/imagesWrong/01_lenght.png'
 
     }
 
-    drawWrong01() {
+    draw() {
         this.ctx.drawImage(
-            this.imageWrong01,
+            this.imageWrong,
             this.obstaclePos.x,
             this.obstaclePos.y,
             this.obstacleSize.w,
