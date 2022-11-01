@@ -1,12 +1,21 @@
 class WrongObstacle {
-    constructor(ctx, canvasSize) {
+    constructor(ctx, canvasSize, counter, rightX = 0, rightW = 0) {
+
         this.ctx = ctx
         this.canvasSize = canvasSize
         this.obstacleSize = {
             w: 200, h: 75
         }
+
+        const rightPoint = rightX + rightW
+        const leftPoint = rightX - rightW
+        let pos = Math.random() * (canvasSize.w - this.obstacleSize.w)
+        while (pos < rightPoint && pos > leftPoint) {
+            pos = Math.random() * (canvasSize.w - this.obstacleSize.w)
+        }
+
         this.obstaclePos = {
-            x: Math.random() * canvasSize.w - this.obstacleSize.w,
+            x: pos,
             y: 0
         }
         this.obstacleSpeed = 3

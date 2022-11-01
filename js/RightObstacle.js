@@ -2,12 +2,12 @@ class RightObstacle {
     constructor(ctx, canvasSize, counterRight) {
         this.ctx = ctx
         this.canvasSize = canvasSize
-        this.imageName = ['01_length', '02_heigth', '03_width', '04_Array[]', '05_Object{}']
+        this.imageName = ['01_length', '02_height', '03_width', '04_Array[]', '05_Object{}']
         this.obstacleSize = {
             w: 200, h: 75
         }
         this.obstaclePos = {
-            x: Math.random() * canvasSize.w - this.obstacleSize.w,
+            x: Math.random() * (canvasSize.w - this.obstacleSize.w),
             y: 0
         }
         this.obstacleSpeed = 3

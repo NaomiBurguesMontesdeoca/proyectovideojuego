@@ -3,11 +3,11 @@ class Player {
         this.ctx = ctx
         this.canvasSize = canvasSize
         this.playerSize = {
-            w: 100, h: 100
+            w: 120, h: 120
         }
         this.playerPos = {
             x: canvasSize.w / 2 - this.playerSize.w / 2,
-            y: canvasSize.h - this.playerSize.h - 50
+            y: canvasSize.h - this.playerSize.h - 30
         }
         this.playerVel = 20
 

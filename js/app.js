@@ -11,6 +11,7 @@ const game = {
     textLifes: 3,
     textScore: 'SCORE: ',
 
+    obstacles: [],
     obstacleRight: [],
     counterRight: 0,
     obstacleWrong: [],
@@ -35,8 +36,9 @@ const game = {
         this.createLab()
         this.createLifes()
         this.createLifesScore()
-        this.createObstacleRight()
-        this.createObstacleWrong()
+        this.createObstacles()
+        // this.createObstacleRight()
+        // this.createObstacleWrong()
         this.start()
     },
 
@@ -66,6 +68,11 @@ const game = {
             }
             if (this.timeCounter % 600 === 0) {
                 this.createLifes()
+            }
+
+            if (this.timeCounter % 50 === 0) {
+                this.createObstacles()
+                // this.createObstacleRight()
             }
 
             this.clearAll()
@@ -104,6 +111,7 @@ const game = {
 
     moveAll() {
         this.player.setEventHandlers()
+        this.obstacles.forEach(pair => pair.forEach(word => word.move()))
         this.obstacleRight.forEach(elm => elm.move())
         this.obstacleWrong.forEach(elm => elm.move())
         this.monster.forEach(elm => elm.move())
@@ -121,6 +129,7 @@ const game = {
         this.monster.forEach(elm => elm.draw())
         this.lab.forEach(elm => elm.draw())
         this.lifes.forEach(elm => elm.draw())
+        this.obstacles.forEach(pair => pair.forEach(word => word.draw()))
         this.obstacleRight.forEach(elm => elm.draw())
         this.obstacleWrong.forEach(elm => elm.draw())
     },
@@ -133,14 +142,21 @@ const game = {
     },
 
     drawTextScore(textScore) {
-        this.ctx.font = '30px arial'
+        this.ctx.font = '25px arial'
         this.ctx.fillStyle = 'black'
-        this.ctx.fillText(textScore, 50, 60)
+        this.ctx.fillText(textScore, 30, 45)
     },
-
+    createObstacles() {
+        const rightObstacle = new RightObstacle(this.ctx, this.canvasSize, this.counterRight)
+        const wrongObstacle = new WrongObstacle(this.ctx, this.canvasSize, this.counterRight, rightObstacle.obstaclePos.x, rightObstacle.obstacleSize.w)
+        this.obstacles.push([rightObstacle, wrongObstacle])
+    },
     createObstacleRight() {
         this.obstacleRight.push(new RightObstacle(this.ctx, this.canvasSize, this.counterRight))
-        for (let i = 0; i < 5; i++) {
+        if (this.counterRight === 4) {
+            this.counterRight = 0
+        }
+        else {
             this.counterRight += 1
         }
 
@@ -262,7 +278,5 @@ const game = {
 
     gameOver() {
         this.textLifes === 0 ? clearInterval(this.interval) : null // porque hace el game over antes de cambiar la vida a 0
-        console.log('game over')
-        // clearInterval ? this.init() : null
     },
 }
