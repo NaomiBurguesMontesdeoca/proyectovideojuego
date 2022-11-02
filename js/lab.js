@@ -6,7 +6,7 @@ class Lab {
             w: 70, h: 70
         }
         this.labPos = {
-            x: Math.random() * canvasSize.w - this.labSize.w,
+            x: Math.random() * (canvasSize.w - this.labSize.w),
             y: 0
         }
         this.image = new Image()

@@ -6,6 +6,7 @@ class Player {
             w: 120, h: 120
         }
         this.playerPos = {
+
             x: canvasSize.w / 2 - this.playerSize.w / 2,
             y: canvasSize.h - this.playerSize.h - 30
         }
@@ -15,7 +16,15 @@ class Player {
         this.image.src = "../images/player.png"
         // this.image.frames = 3
         // this.image.framesIndex = 0
+
+        if (this.playerPos.x < 0) {
+            this.playerPos.x = 0 + this.playerSize.w
+        } else if (this.playerPos.x > this.canvasSize.w) {
+            this.playerPos.x = this.canvasSize.w - this.playerSize.w
+        }
     }
+
+
 
     draw() {
         this.ctx.drawImage(

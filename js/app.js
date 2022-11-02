@@ -9,12 +9,13 @@ const game = {
     player: undefined,
     lifesScore: undefined,
     textLifes: 3,
-    textScore: 'SCORE: ',
+    textScore: `SCORE: ${0}`,
 
     obstacles: [],
     obstacleRight: [],
-    counterRight: 0,
     obstacleWrong: [],
+    counter: 0,
+
 
     monster: [],
     lab: [],
@@ -81,6 +82,7 @@ const game = {
             this.isColisionMonster()
             this.isColisionLab()
             this.isColisionLifes()
+            // this.isColisionObstacles()
             this.isColisionObstacleRight()
             this.isColisionObstacleWrong()
             this.isCurrentBonus()
@@ -112,8 +114,8 @@ const game = {
     moveAll() {
         this.player.setEventHandlers()
         this.obstacles.forEach(pair => pair.forEach(word => word.move()))
-        this.obstacleRight.forEach(elm => elm.move())
-        this.obstacleWrong.forEach(elm => elm.move())
+        // this.obstacleRight.forEach(elm => elm.move())
+        // this.obstacleWrong.forEach(elm => elm.move())
         this.monster.forEach(elm => elm.move())
         this.lab.forEach(elm => elm.move())
         this.lifes.forEach(elm => elm.move())
@@ -130,8 +132,8 @@ const game = {
         this.lab.forEach(elm => elm.draw())
         this.lifes.forEach(elm => elm.draw())
         this.obstacles.forEach(pair => pair.forEach(word => word.draw()))
-        this.obstacleRight.forEach(elm => elm.draw())
-        this.obstacleWrong.forEach(elm => elm.draw())
+        // this.obstacleRight.forEach(elm => elm.draw())
+        // this.obstacleWrong.forEach(elm => elm.draw())
     },
 
     drawText(textLifes) {
@@ -147,23 +149,27 @@ const game = {
         this.ctx.fillText(textScore, 30, 45)
     },
     createObstacles() {
-        const rightObstacle = new RightObstacle(this.ctx, this.canvasSize, this.counterRight)
-        const wrongObstacle = new WrongObstacle(this.ctx, this.canvasSize, this.counterRight, rightObstacle.obstaclePos.x, rightObstacle.obstacleSize.w)
+        const rightObstacle = new RightObstacle(this.ctx, this.canvasSize, this.counter)
+        const wrongObstacle = new WrongObstacle(this.ctx, this.canvasSize, this.counter, rightObstacle.obstaclePos.x, rightObstacle.obstacleSize.w)
+        this.obstacleRight.push(rightObstacle)
+        this.obstacleWrong.push(wrongObstacle)
         this.obstacles.push([rightObstacle, wrongObstacle])
-    },
-    createObstacleRight() {
-        this.obstacleRight.push(new RightObstacle(this.ctx, this.canvasSize, this.counterRight))
-        if (this.counterRight === 4) {
-            this.counterRight = 0
+        if (this.counter === 8) {
+            this.counter = 0
         }
         else {
-            this.counterRight += 1
+            this.counter += 1
         }
 
+
+    },
+    createObstacleRight() {
+        console.log(this.counter)
+        this.obstacleRight.push(new RightObstacle(this.ctx, this.canvasSize, this.counter))
     },
 
     createObstacleWrong() {
-        this.obstacleWrong.push(new WrongObstacle(this.ctx, this.canvasSize))
+        this.obstacleWrong.push(new WrongObstacle(this.ctx, this.canvasSize, this.counter))
     },
 
     createMonster() {
@@ -247,6 +253,33 @@ const game = {
             }
         })
     },
+
+    // isColisionObstacles() {
+    //     this.obstacles[0].forEach((R) => {
+    //         if (
+    //             this.player.playerPos.x < R.obstaclePos.x + R.obstacleSize.w &&
+    //             this.player.playerPos.x + this.player.playerSize.w > R.obstaclePos.x &&
+    //             this.player.playerPos.y < R.obstaclePos.y + this.player.playerSize.h &&
+    //             this.player.playerSize.h + this.player.playerPos.y > R.obstaclePos.y
+    //         ) {
+    //             this.textScore += 10
+    //             R.obstaclePos.y = 5000 //debe desaparecer a la vez que el wrong
+    //         }
+    //     })
+
+    //     this.obstacles[1].forEach((W) => {
+    //         if (
+    //             this.player.playerPos.x < W.obstaclePos.x + W.obstacleSize.w &&
+    //             this.player.playerPos.x + this.player.playerSize.w > W.obstaclePos.x &&
+    //             this.player.playerPos.y < W.obstaclePos.y + this.player.playerSize.h &&
+    //             this.player.playerSize.h + this.player.playerPos.y > W.obstaclePos.y
+    //         ) {
+    //             this.textLifes--
+    //             W.obstaclePos.y = 5000 //debe desaparecer a la vez que el right
+    //         }
+    //     })
+
+    // },
 
     isColisionObstacleRight() {
         this.obstacleRight.forEach((R) => {

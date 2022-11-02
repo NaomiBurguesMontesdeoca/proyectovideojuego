@@ -3,6 +3,7 @@ class WrongObstacle {
 
         this.ctx = ctx
         this.canvasSize = canvasSize
+        this.imageName = ['01_lenght', '02_heitgh', '03_widht', '04_ArrayWrong', '05_ObjectWrong', '06_Conts', '07_CommentsWrong', '08_VariableIniWrong', '09_ConsoleWrong']
         this.obstacleSize = {
             w: 200, h: 75
         }
@@ -19,9 +20,10 @@ class WrongObstacle {
             y: 0
         }
         this.obstacleSpeed = 3
+        this.counter = counter
 
         this.imageWrong = new Image()
-        this.imageWrong.src = '../images/imagesWrong/01_lenght.png'
+        this.imageWrong.src = `../images/imagesWrong/${this.imageName[this.counter]}.png`
 
     }
 

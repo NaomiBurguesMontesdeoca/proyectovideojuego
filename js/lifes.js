@@ -6,7 +6,7 @@ class Lifes {
             w: 40, h: 40
         }
         this.lifesPos = {
-            x: Math.random() * canvasSize.w - this.lifesSize.w,
+            x: Math.random() * (canvasSize.w - this.lifesSize.w),
             y: 0
         }
         this.image = new Image()

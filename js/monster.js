@@ -6,7 +6,7 @@ class Monster {
             w: 50, h: 50
         }
         this.monsterPos = {
-            x: Math.random() * canvasSize.w - this.monsterSize.w,
+            x: Math.random() * (canvasSize.w - this.monsterSize.w),
             y: 0
         }
         this.image = new Image()
