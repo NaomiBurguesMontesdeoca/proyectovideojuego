@@ -11,7 +11,6 @@ class LifesScore {
         }
         this.image = new Image()
         this.image.src = '../images/lifes.png'
-        // this.text = 3
     }
 
     draw() {

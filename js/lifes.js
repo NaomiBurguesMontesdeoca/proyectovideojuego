@@ -22,7 +22,7 @@ class Lifes {
             this.lifesSize.w,
             this.lifesSize.h)
 
-        this.move() //preguntar porque es necesario aqui 
+        this.move()
     }
 
     move() {

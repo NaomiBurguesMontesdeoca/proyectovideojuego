@@ -16,12 +16,6 @@ class Player {
         this.image.src = "../images/player.png"
         // this.image.frames = 3
         // this.image.framesIndex = 0
-
-        if (this.playerPos.x < 0) {
-            this.playerPos.x = 0 + this.playerSize.w
-        } else if (this.playerPos.x > this.canvasSize.w) {
-            this.playerPos.x = this.canvasSize.w - this.playerSize.w
-        }
     }
 
 
@@ -39,12 +33,20 @@ class Player {
         document.onkeydown = event => {
             switch (event.key) {
                 case 'ArrowLeft':
-                    this.playerPos.x -= this.playerVel
+                    if (this.playerPos.x > 0) {
+                        this.playerPos.x -= this.playerVel
+                    }
                     break;
                 case 'ArrowRight':
-                    this.playerPos.x += this.playerVel
+                    if (this.playerPos.x < this.canvasSize.w - this.playerSize.w) {
+                        this.playerPos.x += this.playerVel
+                    }
+                    break;
+                case ' ':
+                    event.preventDefault()
                     break;
             }
         }
+
     }
 }

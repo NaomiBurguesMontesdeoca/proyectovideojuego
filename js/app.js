@@ -5,11 +5,12 @@ const game = {
     version: '1.0.0',
     ctx: undefined,
     background: undefined,
+    gameOverBackground: undefined,
 
     player: undefined,
     lifesScore: undefined,
-    textLifes: 3,
-    textScore: `SCORE: ${0}`,
+    textLifes: 1,
+    textScore: 0,
 
     obstacles: [],
     obstacleRight: [],
@@ -33,13 +34,7 @@ const game = {
     init() {
         this.setContext()
         this.setDimensions()
-        this.createMonster()
-        this.createLab()
-        this.createLifes()
         this.createLifesScore()
-        this.createObstacles()
-        // this.createObstacleRight()
-        // this.createObstacleWrong()
         this.start()
     },
 
@@ -73,28 +68,29 @@ const game = {
 
             if (this.timeCounter % 50 === 0) {
                 this.createObstacles()
-                // this.createObstacleRight()
             }
+
 
             this.clearAll()
             this.drawAll()
+            this.gameOver()
             this.moveAll()
             this.isColisionMonster()
             this.isColisionLab()
             this.isColisionLifes()
-            // this.isColisionObstacles()
             this.isColisionObstacleRight()
             this.isColisionObstacleWrong()
             this.isCurrentBonus()
-            this.gameOver()
 
-        }, 50)// como hacer que cada uno empiece en un tiempo diferente?
+
+        }, 50)
     },
 
     reset() {
         this.background = new Background(this.ctx, this.canvasSize)
         this.player = new Player(this.ctx, this.canvasSize)
         this.lifesScore = new LifesScore(this.ctx, this.canvasSize)
+        this.gameOverBackground = new GameOverBackground(this.ctx, this.canvasSize)
     },
 
     clearAll() {
@@ -114,8 +110,6 @@ const game = {
     moveAll() {
         this.player.setEventHandlers()
         this.obstacles.forEach(pair => pair.forEach(word => word.move()))
-        // this.obstacleRight.forEach(elm => elm.move())
-        // this.obstacleWrong.forEach(elm => elm.move())
         this.monster.forEach(elm => elm.move())
         this.lab.forEach(elm => elm.move())
         this.lifes.forEach(elm => elm.move())
@@ -127,26 +121,24 @@ const game = {
         this.player.draw()
         this.lifesScore.draw()
         this.drawText(this.textLifes)
-        this.drawTextScore(this.textScore)
+        this.drawTextScore()
         this.monster.forEach(elm => elm.draw())
         this.lab.forEach(elm => elm.draw())
         this.lifes.forEach(elm => elm.draw())
         this.obstacles.forEach(pair => pair.forEach(word => word.draw()))
-        // this.obstacleRight.forEach(elm => elm.draw())
-        // this.obstacleWrong.forEach(elm => elm.draw())
     },
 
     drawText(textLifes) {
-        this.ctx.font = '30px arial'
+        this.ctx.font = '30px century gothic'
         this.ctx.fillStyle = '#D21404'
         this.ctx.fillText(textLifes, this.lifesScore.lifesScorePos.x - this.lifesScore.lifesScoreSize.w,
             this.lifesScore.lifesScorePos.y + this.lifesScore.lifesScoreSize.h - 5)
     },
 
-    drawTextScore(textScore) {
-        this.ctx.font = '25px arial'
+    drawTextScore() {
+        this.ctx.font = '25px century gothic'
         this.ctx.fillStyle = 'black'
-        this.ctx.fillText(textScore, 30, 45)
+        this.ctx.fillText(`SCORE: ${this.textScore}`, 30, 45)
     },
     createObstacles() {
         const rightObstacle = new RightObstacle(this.ctx, this.canvasSize, this.counter)
@@ -160,9 +152,8 @@ const game = {
         else {
             this.counter += 1
         }
-
-
     },
+
     createObstacleRight() {
         console.log(this.counter)
         this.obstacleRight.push(new RightObstacle(this.ctx, this.canvasSize, this.counter))
@@ -254,33 +245,6 @@ const game = {
         })
     },
 
-    // isColisionObstacles() {
-    //     this.obstacles[0].forEach((R) => {
-    //         if (
-    //             this.player.playerPos.x < R.obstaclePos.x + R.obstacleSize.w &&
-    //             this.player.playerPos.x + this.player.playerSize.w > R.obstaclePos.x &&
-    //             this.player.playerPos.y < R.obstaclePos.y + this.player.playerSize.h &&
-    //             this.player.playerSize.h + this.player.playerPos.y > R.obstaclePos.y
-    //         ) {
-    //             this.textScore += 10
-    //             R.obstaclePos.y = 5000 //debe desaparecer a la vez que el wrong
-    //         }
-    //     })
-
-    //     this.obstacles[1].forEach((W) => {
-    //         if (
-    //             this.player.playerPos.x < W.obstaclePos.x + W.obstacleSize.w &&
-    //             this.player.playerPos.x + this.player.playerSize.w > W.obstaclePos.x &&
-    //             this.player.playerPos.y < W.obstaclePos.y + this.player.playerSize.h &&
-    //             this.player.playerSize.h + this.player.playerPos.y > W.obstaclePos.y
-    //         ) {
-    //             this.textLifes--
-    //             W.obstaclePos.y = 5000 //debe desaparecer a la vez que el right
-    //         }
-    //     })
-
-    // },
-
     isColisionObstacleRight() {
         this.obstacleRight.forEach((R) => {
             if (
@@ -290,7 +254,7 @@ const game = {
                 this.player.playerSize.h + this.player.playerPos.y > R.obstaclePos.y
             ) {
                 this.textScore += 10
-                R.obstaclePos.y = 5000 //debe desaparecer a la vez que el wrong
+                R.obstaclePos.y = 5000
             }
         })
     },
@@ -309,7 +273,26 @@ const game = {
         })
     },
 
-    gameOver() {
-        this.textLifes === 0 ? clearInterval(this.interval) : null // porque hace el game over antes de cambiar la vida a 0
+    drawGameOver() {
+
+
+        this.ctx.fillStyle = 'white';
+        this.ctx.beginPath();
+        this.ctx.font = "40px century gothic";
+        this.ctx.fillText(`Your score is: ${this.textScore}`,
+            this.canvasSize.w / 2 - 150,
+            this.canvasSize.h - 200);
+        this.ctx.closePath();
+
     },
+
+    gameOver() {
+
+        if (this.textLifes === 0) {
+            clearInterval(this.interval)
+            this.clearAll()
+            this.gameOverBackground.draw()
+            this.drawGameOver()
+        }
+    }
 }

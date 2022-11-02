@@ -22,7 +22,7 @@ class Lab {
             this.labSize.w,
             this.labSize.h)
 
-        this.move() //preguntar porque es necesario aqui 
+        this.move()
     }
 
     move() {

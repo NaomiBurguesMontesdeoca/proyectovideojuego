@@ -45,6 +45,4 @@ class WrongObstacle {
     clear() {
 
     }
-
-
 }
