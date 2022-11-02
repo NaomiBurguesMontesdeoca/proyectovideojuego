@@ -14,8 +14,8 @@ class Player {
 
         this.image = new Image()
         this.image.src = "../images/player.png"
-        // this.image.frames = 3
-        // this.image.framesIndex = 0
+        this.image.frames = 3
+        this.image.framesIndex = 2
     }
 
 

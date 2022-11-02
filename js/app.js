@@ -70,7 +70,6 @@ const game = {
                 this.createObstacles()
             }
 
-
             this.clearAll()
             this.drawAll()
             this.gameOver()
@@ -81,8 +80,6 @@ const game = {
             this.isColisionObstacleRight()
             this.isColisionObstacleWrong()
             this.isCurrentBonus()
-
-
         }, 50)
     },
 
@@ -275,7 +272,6 @@ const game = {
 
     drawGameOver() {
 
-
         this.ctx.fillStyle = 'white';
         this.ctx.beginPath();
         this.ctx.font = "40px century gothic";
@@ -283,6 +279,7 @@ const game = {
             this.canvasSize.w / 2 - 150,
             this.canvasSize.h - 200);
         this.ctx.closePath();
+        this.gameOver() ? document.querySelector('#restart-button') : null
 
     },
 
@@ -293,6 +290,7 @@ const game = {
             this.clearAll()
             this.gameOverBackground.draw()
             this.drawGameOver()
+            console.log(document.querySelector('#restart-button'))
         }
     }
 }

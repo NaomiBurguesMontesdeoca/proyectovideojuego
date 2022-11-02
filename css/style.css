@@ -11,7 +11,7 @@
 
 }
 
-body button {
+#start-button {
     font-size: 40px;
     background-color: #D21404;
     color: #fff;
@@ -26,4 +26,25 @@ body button {
 
 body {
     overflow: hidden;
+}
+
+.lastcontainer {
+    margin-top: 300px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+
+}
+
+#restart-button {
+    font-size: 40px;
+    background-color: #fff;
+    color: 'black';
+    padding: 20px 40px;
+    border: 0;
+    box-shadow: 0;
+    border-radius: 5px;
+    margin: 0;
+    position: absolute;
+    display: none
 }
