@@ -98,9 +98,9 @@ const game = {
         this.lab = this.lab.filter(elm => elm.labPos.y <= this.canvasSize.h)
         this.lifes.forEach(elm => elm.clear())
         this.lifes = this.lifes.filter(elm => elm.lifesPos.y <= this.canvasSize.h)
-        this.obstacleRight.forEach(elm => elm.clear())
+
         this.obstacleRight = this.obstacleRight.filter(elm => elm.obstaclePos.y <= this.canvasSize.h)
-        this.obstacleWrong.forEach(elm => elm.clear())
+
         this.obstacleWrong = this.obstacleWrong.filter(elm => elm.obstaclePos.y <= this.canvasSize.h)
     },
 
@@ -290,7 +290,7 @@ const game = {
             this.clearAll()
             this.gameOverBackground.draw()
             this.drawGameOver()
-            console.log(document.querySelector('#restart-button'))
+            document.querySelector('#restart-button').style.display = 'block'
         }
     }
 }

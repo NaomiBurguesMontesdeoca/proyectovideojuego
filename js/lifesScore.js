@@ -10,7 +10,7 @@ class LifesScore {
             y: 30
         }
         this.image = new Image()
-        this.image.src = '../images/lifes.png'
+        this.image.src = './images/lifes.png'
     }
 
     draw() {

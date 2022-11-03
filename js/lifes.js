@@ -10,7 +10,7 @@ class Lifes {
             y: 0
         }
         this.image = new Image()
-        this.image.src = '../images/lifes.png'
+        this.image.src = './images/lifes.png'
         this.lifesSpeed = 8
     }
 

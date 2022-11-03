@@ -8,7 +8,7 @@ class Background {
         }
 
         this.image = new Image()
-        this.image.src = "../images/background.png"
+        this.image.src = "./images/background.png"
     }
 
     draw() {

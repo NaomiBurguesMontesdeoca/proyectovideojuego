@@ -8,7 +8,7 @@ class GameOverBackground {
         }
 
         this.image = new Image()
-        this.image.src = "../images/gameOver.jpg"
+        this.image.src = "./images/gameOver.jpg"
     }
 
     draw() {

@@ -23,7 +23,7 @@ class WrongObstacle {
         this.counter = counter
 
         this.imageWrong = new Image()
-        this.imageWrong.src = `../images/imagesWrong/${this.imageName[this.counter]}.png`
+        this.imageWrong.src = `./images/imagesWrong/${this.imageName[this.counter]}.png`
 
     }
 

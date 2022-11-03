@@ -10,7 +10,7 @@ class Lab {
             y: 0
         }
         this.image = new Image()
-        this.image.src = '../images/lab.png'
+        this.image.src = './images/lab.png'
         this.labSpeed = 3
     }
 

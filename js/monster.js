@@ -10,7 +10,7 @@ class Monster {
             y: 0
         }
         this.image = new Image()
-        this.image.src = '../images/pngwing.com.png'
+        this.image.src = './images/pngwing.com.png'
         this.monsterSpeed = 5
     }
 

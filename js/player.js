@@ -13,9 +13,9 @@ class Player {
         this.playerVel = 20
 
         this.image = new Image()
-        this.image.src = "../images/player.png"
-        this.image.frames = 3
-        this.image.framesIndex = 2
+        this.image.src = "./images/player.png"
+        // this.image.frames = 3
+        // this.image.framesIndex = 1
     }
 
 
@@ -23,6 +23,7 @@ class Player {
     draw() {
         this.ctx.drawImage(
             this.image,
+            // this.image.framesIndex * (this.image.width / this.image.frames),
             this.playerPos.x,
             this.playerPos.y,
             this.playerSize.w,
@@ -36,6 +37,7 @@ class Player {
                     if (this.playerPos.x > 0) {
                         this.playerPos.x -= this.playerVel
                     }
+                    this.image.frames
                     break;
                 case 'ArrowRight':
                     if (this.playerPos.x < this.canvasSize.w - this.playerSize.w) {

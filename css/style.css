@@ -3,29 +3,16 @@
     padding: 0;
 }
 
-.container {
-    margin-top: 180px;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-
-}
-
-#start-button {
-    font-size: 40px;
-    background-color: #D21404;
-    color: #fff;
-    padding: 20px 40px;
-    border: 0;
-    box-shadow: 0;
-    border-radius: 5px;
-    margin: 0;
-    position: absolute;
-
-}
-
 body {
     overflow: hidden;
+    background-image: url(https://i2-prod.mirror.co.uk/incoming/article26162991.ece/ALTERNATES/s1200/1_PAY-BNPS_DaftDiversion_03.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0, 0;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+
 }
 
 .lastcontainer {
@@ -47,4 +34,46 @@ body {
     margin: 0;
     position: absolute;
     display: none
+}
+
+.container {
+    /* margin-top: 180px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+
+
+}
+
+.container p {
+    color: white;
+    font-size: 25px;
+    font-family: "century gothic";
+    text-align: left;
+    margin-top: 10px;
+    margin-left: 750px;
+
+}
+
+.container h1 {
+    color: white;
+    font-family: "century gothic";
+    margin-left: 320px;
+
+}
+
+#start-button {
+    font-size: 30px;
+    background-color: #fff;
+    color: 'black';
+    padding: 10px 30px;
+    border: 0;
+    box-shadow: 0;
+    border-radius: 5px;
+    margin-left: 350px;
+    margin-top: 200px;
+    position: absolute;
 }

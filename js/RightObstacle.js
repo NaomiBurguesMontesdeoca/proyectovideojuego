@@ -15,7 +15,7 @@ class RightObstacle {
         console.log(this.counter)
 
         this.imageRight = new Image()
-        this.imageRight.src = `../images/imagesRight/${this.imageName[this.counter]}.png`
+        this.imageRight.src = `./images/imagesRight/${this.imageName[this.counter]}.png`
     }
 
 
