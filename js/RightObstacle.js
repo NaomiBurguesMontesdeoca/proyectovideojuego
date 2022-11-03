@@ -2,7 +2,7 @@ class RightObstacle {
     constructor(ctx, canvasSize, counter) {
         this.ctx = ctx
         this.canvasSize = canvasSize
-        this.imageName = ['01_length', '02_height', '03_width', '04_ArrayRight', '05_ObjectRight', '06_Const', '07_CommentsRight', '08_VariableIniRight', '09_ConsoleRight']
+        this.imageName = ['01_length', '02_height', '03_width', '04_ArrayRight', '05_ObjectRight', '06_Const', '07_QueryRight', '08_FillRectRight', '09_forEachRight', '10_MathRight', '11_clearRecrRight']
         this.obstacleSize = {
             w: 200, h: 75
         }
@@ -17,8 +17,6 @@ class RightObstacle {
         this.imageRight = new Image()
         this.imageRight.src = `./images/imagesRight/${this.imageName[this.counter]}.png`
     }
-
-
 
     draw() {
         this.ctx.drawImage(

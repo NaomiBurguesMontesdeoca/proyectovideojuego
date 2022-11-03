@@ -3,7 +3,7 @@ class WrongObstacle {
 
         this.ctx = ctx
         this.canvasSize = canvasSize
-        this.imageName = ['01_lenght', '02_heitgh', '03_widht', '04_ArrayWrong', '05_ObjectWrong', '06_Conts', '07_CommentsWrong', '08_VariableIniWrong', '09_ConsoleWrong']
+        this.imageName = ['01_lenght', '02_heitgh', '03_widht', '04_ArrayWrong', '05_ObjectWrong', '06_Conts', '07_QueryWrong', '08_FillRectWrong', '09_forEachWrong', '10_MathWrong', '11_clearRectWrong']
         this.obstacleSize = {
             w: 200, h: 75
         }

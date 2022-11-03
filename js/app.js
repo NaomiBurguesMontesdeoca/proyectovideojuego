@@ -9,7 +9,7 @@ const game = {
 
     player: undefined,
     lifesScore: undefined,
-    textLifes: 1,
+    textLifes: 3,
     textScore: 0,
 
     obstacles: [],
@@ -140,7 +140,7 @@ const game = {
         this.obstacleRight.push(rightObstacle)
         this.obstacleWrong.push(wrongObstacle)
         this.obstacles.push([rightObstacle, wrongObstacle])
-        if (this.counter === 8) {
+        if (this.counter === 10) {
             this.counter = 0
         }
         else {
