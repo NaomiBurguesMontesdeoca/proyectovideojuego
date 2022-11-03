@@ -28,8 +28,4 @@ class Monster {
     move() {
         this.monsterPos.y += this.monsterSpeed
     }
-
-    clear() {
-
-    }
 }

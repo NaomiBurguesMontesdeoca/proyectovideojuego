@@ -30,8 +30,4 @@ class Lifes {
 
         this.lifesPos.y += this.lifesSpeed
     }
-
-    clear() {
-
-    }
 }

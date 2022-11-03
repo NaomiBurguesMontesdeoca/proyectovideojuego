@@ -34,9 +34,4 @@ class RightObstacle {
     move() {
         this.obstaclePos.y += this.obstacleSpeed
     }
-
-    clear() {
-
-    }
-
 }

@@ -41,8 +41,4 @@ class WrongObstacle {
     move() {
         this.obstaclePos.y += this.obstacleSpeed
     }
-
-    clear() {
-
-    }
 }

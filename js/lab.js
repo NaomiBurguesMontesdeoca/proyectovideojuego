@@ -30,8 +30,4 @@ class Lab {
 
         this.labPos.y += this.labSpeed
     }
-
-    clear() {
-
-    }
 }

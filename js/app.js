@@ -32,10 +32,12 @@ const game = {
     },
 
     init() {
+        document.querySelector('#myCanvas').style = 'display:block'
         this.setContext()
         this.setDimensions()
         this.createLifesScore()
         this.start()
+
     },
 
     setContext() {
@@ -92,15 +94,10 @@ const game = {
 
     clearAll() {
         this.ctx.clearRect(0, 0, this.canvasSize.w, this.canvasSize.h)
-        this.monster.forEach(elm => elm.clear())
         this.monster = this.monster.filter(elm => elm.monsterPos.y <= this.canvasSize.h)
-        this.lab.forEach(elm => elm.clear())
         this.lab = this.lab.filter(elm => elm.labPos.y <= this.canvasSize.h)
-        this.lifes.forEach(elm => elm.clear())
         this.lifes = this.lifes.filter(elm => elm.lifesPos.y <= this.canvasSize.h)
-
         this.obstacleRight = this.obstacleRight.filter(elm => elm.obstaclePos.y <= this.canvasSize.h)
-
         this.obstacleWrong = this.obstacleWrong.filter(elm => elm.obstaclePos.y <= this.canvasSize.h)
     },
 
@@ -279,18 +276,18 @@ const game = {
             this.canvasSize.w / 2 - 150,
             this.canvasSize.h - 200);
         this.ctx.closePath();
-        this.gameOver() ? document.querySelector('#restart-button') : null
-
     },
 
     gameOver() {
 
         if (this.textLifes === 0) {
-            clearInterval(this.interval)
             this.clearAll()
+            document.querySelector('#myCanvas').style.display = 'block'
+            clearInterval(this.interval)
             this.gameOverBackground.draw()
             this.drawGameOver()
             document.querySelector('#restart-button').style.display = 'block'
+            console
         }
     }
 }

@@ -3,7 +3,7 @@ class Player {
         this.ctx = ctx
         this.canvasSize = canvasSize
         this.playerSize = {
-            w: 120, h: 120
+            w: 90, h: 100
         }
         this.playerPos = {
 
@@ -14,8 +14,10 @@ class Player {
 
         this.image = new Image()
         this.image.src = "./images/player.png"
-        // this.image.frames = 3
-        // this.image.framesIndex = 1
+        this.image.frames = 3
+        this.image.framesIndex = 1
+
+        this.currentPosition = undefined
     }
 
 
@@ -23,11 +25,16 @@ class Player {
     draw() {
         this.ctx.drawImage(
             this.image,
-            // this.image.framesIndex * (this.image.width / this.image.frames),
+            this.image.framesIndex * (this.image.width / this.image.frames),
+            0,
+            this.image.width / this.image.frames,
+            this.image.height,
             this.playerPos.x,
             this.playerPos.y,
             this.playerSize.w,
             this.playerSize.h)
+
+        this.animate()
     }
 
     setEventHandlers() {
@@ -37,12 +44,14 @@ class Player {
                     if (this.playerPos.x > 0) {
                         this.playerPos.x -= this.playerVel
                     }
-                    this.image.frames
+                    this.currentPosition = 'Left'
+                    console.log(this.currentPosition)
                     break;
                 case 'ArrowRight':
                     if (this.playerPos.x < this.canvasSize.w - this.playerSize.w) {
                         this.playerPos.x += this.playerVel
                     }
+                    this.currentPosition = 'Right'
                     break;
                 case ' ':
                     event.preventDefault()
@@ -50,5 +59,14 @@ class Player {
             }
         }
 
+    }
+
+    animate() {
+        if (this.currentPosition === 'Left') {
+            this.image.framesIndex = 0
+        }
+        else if (this.currentPosition === 'Right') {
+            this.image.framesIndex = 2
+        }
     }
 }
