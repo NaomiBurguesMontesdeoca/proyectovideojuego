@@ -45,7 +45,6 @@ class Player {
                         this.playerPos.x -= this.playerVel
                     }
                     this.currentPosition = 'Left'
-                    console.log(this.currentPosition)
                     break;
                 case 'ArrowRight':
                     if (this.playerPos.x < this.canvasSize.w - this.playerSize.w) {

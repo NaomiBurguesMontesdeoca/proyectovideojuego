@@ -61,7 +61,8 @@ body {
 .container h1 {
     color: white;
     font-family: "century gothic";
-    margin-left: 320px;
+    margin-left: 420px;
+    font-size: 60px;
 
 }
 
@@ -74,6 +75,6 @@ body {
     box-shadow: 0;
     border-radius: 5px;
     margin-left: 350px;
-    margin-top: 200px;
+    margin-top: 250px;
     position: absolute;
 }
